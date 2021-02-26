@@ -4,12 +4,16 @@ import Home from "./components/Home";
 import ProductDetail from "./components/ProductDetail";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
+import NewProduct from "./components/NewProduct";
 
 function App() {
   return (
     <Router>
       <Navigation />
       <Switch>
+        <Route path="/products/new">
+          <NewProduct />
+        </Route>
         <Route path="/products/:productId">
           <ProductDetail />
         </Route>

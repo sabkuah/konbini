@@ -9,7 +9,7 @@ const Home = () => {
       const items = await getProducts();
       //console.log("items>>>", items);
       await setProducts(JSON.parse(items));
-      //console.log("products>>>", products);
+      console.log("products>>>", products);
     })();
   }, []);
 

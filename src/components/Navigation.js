@@ -31,6 +31,15 @@ const Navigation = () => {
                 About Us
               </a>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="/products/new"
+              >
+                Add Product
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
