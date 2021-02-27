@@ -5,11 +5,14 @@ import ProductDetail from "./components/ProductDetail";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
 import NewProduct from "./components/NewProduct";
+import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Router>
       <Navigation />
+      <Header />
       <Switch>
         <Route path="/products/new">
           <NewProduct />
