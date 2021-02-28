@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getProducts } from "../network";
 import { Link } from "react-router-dom";
-import { nodeName } from "jquery";
+import { FaEdit } from "react-icons/fa";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +26,7 @@ const Home = () => {
               <th scope="col">Product Name (JP)</th>
               <th scope="col">Category</th>
               <th scope="col">Quantity</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -40,12 +41,19 @@ const Home = () => {
                 <td>{product.productNameJp}</td>
                 <td>{product.category}</td>
                 <td>{product.quantity}</td>
+                <td>
+                  <button className="btn">
+                    <Link to={`/products/${product.productId}`}>
+                      <FaEdit />
+                    </Link>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="d-flex justify-content-center">
-          <button class="btn btn-success">
+          <button className="btn btn-success">
             <Link to="/products/new" style={{ color: "white" }}>
               Add Product
             </Link>

@@ -1,25 +1,16 @@
 import React, { useState } from "react";
-import { postNewProduct } from "../network";
-import { useHistory } from "react-router-dom";
-import uuid from "react-uuid";
 
-const NewProduct = () => {
-  //need to create a function that randomly generates productIds
+const EditProduct = () => {
+  const [product, setProduct] = useState({});
 
-  const history = useHistory();
-
-  const [newProduct, setNewProduct] = useState({});
-  const addProduct = async (e) => {
-    e.preventDefault();
-    const newId = await uuid();
-    await setNewProduct({ ...newProduct, productId: newId });
-    await postNewProduct(newProduct);
-    history.push("/");
+  const editProduct = async () => {
+    console.log("edit form submitted");
   };
 
   return (
-    <div className="col-6 offset-3 prod-form">
-      <form onSubmit={addProduct}>
+    <div className="col-6 offset-3 prod-form mt-3">
+      <h1 className="text-center">🛑 🚧 EDIT FORM 🚧 🛑</h1>
+      <form onSubmit={editProduct}>
         <div className="mb-3">
           <label for="productNameEn" className="form-label">
             Product Name (EN)
@@ -29,10 +20,10 @@ const NewProduct = () => {
             className="form-control"
             id="productNameEn"
             name="product[productNameEn]"
-            value={newProduct.productNameEn}
+            value={product.productNameEn}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setProduct({
+                ...product,
                 productNameEn: e.target.value,
               });
             }}
@@ -47,10 +38,10 @@ const NewProduct = () => {
             className="form-control"
             id="images"
             name="product[images]"
-            value={newProduct.images}
+            value={product.images}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setProduct({
+                ...product,
                 images: e.target.value,
               });
             }}
@@ -66,10 +57,10 @@ const NewProduct = () => {
             className="form-control"
             id="productNameJp"
             name="product[productNameJp]"
-            value={newProduct.productNameJp}
+            value={product.productNameJp}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setProduct({
+                ...product,
                 productNameJp: e.target.value,
               });
             }}
@@ -85,10 +76,10 @@ const NewProduct = () => {
               className="form-control"
               id="quantity"
               name="product[quantity]"
-              value={newProduct.quantity}
+              value={product.quantity}
               onChange={(e) => {
-                setNewProduct({
-                  ...newProduct,
+                setProduct({
+                  ...product,
                   quantity: e.target.value,
                 });
               }}
@@ -103,10 +94,10 @@ const NewProduct = () => {
               className="form-control"
               id="category"
               name="product[category]"
-              value={newProduct.category}
+              value={product.category}
               onChange={(e) => {
-                setNewProduct({
-                  ...newProduct,
+                setProduct({
+                  ...product,
                   category: e.target.value,
                 });
               }}
@@ -121,10 +112,10 @@ const NewProduct = () => {
             className="form-control"
             id="details"
             name="product[details]"
-            value={newProduct.details}
+            value={product.details}
             onChange={(e) => {
-              setNewProduct({
-                ...newProduct,
+              setProduct({
+                ...product,
                 details: e.target.value,
               });
             }}
@@ -140,4 +131,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default EditProduct;
