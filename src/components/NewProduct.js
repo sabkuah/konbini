@@ -5,59 +5,59 @@ const NewProduct = () => {
   return (
     <div className="col-6">
       <form>
-        <div class="mb-3">
-          <label for="productNameEn" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="productNameEn" className="form-label">
             Product Name (EN)
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="productNameEn"
             name="product[productNameEn]"
           />
         </div>
 
-        <div class="mb-3">
-          <label for="productNameJp" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="productNameJp" className="form-label">
             Product Name (JP)
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="productNameJp"
             name="product[productNameJp]"
           />
         </div>
         <div className="row">
-          <div class="mb-3 col-6">
-            <label for="quantity" class="form-label">
+          <div className="mb-3 col-6">
+            <label htmlFor="quantity" className="form-label">
               Quantity
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="quantity"
               name="product[quantity]"
             />
           </div>
-          <div class="mb-3 col-6">
-            <label for="category" class="form-label">
+          <div className="mb-3 col-6">
+            <label htmlFor="category" className="form-label">
               Category
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="category"
               name="product[category]"
             />
           </div>
         </div>
-        <div class="mb-3">
-          <label for="details" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="details" className="form-label">
             Details
           </label>
           <textarea
-            class="form-control"
+            className="form-control"
             id="details"
             name="product[details]"
           ></textarea>
