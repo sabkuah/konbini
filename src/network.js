@@ -1,15 +1,15 @@
 import axios from "axios";
 const BASE_URL =
-  "https://bc0a6qqmm3.execute-api.ca-central-1.amazonaws.com/prod";
+    "https://bc0a6qqmm3.execute-api.ca-central-1.amazonaws.com/prod";
 
 //=======================
 //    Scan Products
 //=======================
 
 export async function getProducts() {
-  const response = await axios.get(`${BASE_URL}/products`);
+    const response = await axios.get(`${BASE_URL}/products`);
 
-  return response.data.body;
+    return response.data.body;
 }
 
 //=======================
@@ -17,15 +17,21 @@ export async function getProducts() {
 //=======================
 
 export async function getProductById(productId) {
-  const response = await axios.get(`${BASE_URL}/products/${productId}`);
+    const response = await axios.get(`${BASE_URL}/products/${productId}`);
 
-  return response.data;
+    return response.data;
 }
 
 //=======================
 //     Add Product
 //=======================
+export async function postNewProduct(product) {
+    const response = await axios.post(`${BASE_URL}/products`, {
+        product: product,
+    });
 
+    return;
+}
 //=======================
 //   Update Product
 //=======================
