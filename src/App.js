@@ -7,6 +7,7 @@ import About from "./components/About";
 import NewProduct from "./components/NewProduct";
 import "./App.css";
 import Header from "./components/Header";
+import EditProduct from "./components/EditProduct";
 
 function App() {
   return (
@@ -17,11 +18,14 @@ function App() {
         <Route path="/products/new">
           <NewProduct />
         </Route>
-        <Route path="/products/:productId">
-          <ProductDetail />
-        </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/products/:productId/edit">
+          <EditProduct />
+        </Route>
+        <Route path="/products/:productId">
+          <ProductDetail />
         </Route>
         <Route path="/">
           <Home />
