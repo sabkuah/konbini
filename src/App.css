@@ -6,6 +6,8 @@
   height: 100vh;
 } */
 
+/* ======== HEADER ========= */
+
 .header h1 {
   color: #d44349;
 
@@ -22,12 +24,29 @@
   width: 90%;
 }
 
+.logo {
+  height: 100px;
+  width: 100px;
+}
+
+/* ======== HOME PAGE ========= */
+
 .thead {
   background-color: #5786c7;
   color: white;
 }
 
-.logo {
-  height: 100px;
-  width: 100px;
+/* ======== PRODUCT DETAILS ========= */
+
+.product-details {
+  padding: 5%;
+  padding-left: 2%;
+  border-radius: 1%;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.product-name {
+  font-family: "Squada One", cursive;
+  color: #5786c7;
 }
