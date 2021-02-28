@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getProducts } from "../network";
 import { Link } from "react-router-dom";
+import { nodeName } from "jquery";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -43,6 +44,13 @@ const Home = () => {
             ))}
           </tbody>
         </table>
+        <div className="d-flex justify-content-center">
+          <button class="btn btn-success">
+            <Link to="/products/new" style={{ color: "white" }}>
+              Add Product
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   );
