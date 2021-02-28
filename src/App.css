@@ -14,7 +14,6 @@
 }
 
 .header {
-  background-color: whitesmoke;
   min-height: 10vh;
 }
 
@@ -26,4 +25,9 @@
 .thead {
   background-color: #5786c7;
   color: white;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
 }
