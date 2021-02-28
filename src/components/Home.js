@@ -17,8 +17,8 @@ const Home = () => {
   return (
     <div className="body">
       <div className="container">
-        <table class="table mt-1">
-          <thead class="thead">
+        <table className="table mt-1">
+          <thead className="thead">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Product Name (EN)</th>
