@@ -12,7 +12,7 @@ const EditProduct = () => {
       <h1 className="text-center">🛑 🚧 EDIT FORM 🚧 🛑</h1>
       <form onSubmit={editProduct}>
         <div className="mb-3">
-          <label for="productNameEn" className="form-label">
+          <label htmlFor="productNameEn" className="form-label">
             Product Name (EN)
           </label>
           <input
@@ -30,7 +30,7 @@ const EditProduct = () => {
           />
         </div>
         <div className="mb-3">
-          <label for="images" className="form-label">
+          <label htmlFor="images" className="form-label">
             Image URL:
           </label>
           <input
@@ -49,7 +49,7 @@ const EditProduct = () => {
         </div>
 
         <div className="mb-3">
-          <label for="productNameJp" className="form-label">
+          <label htmlFor="productNameJp" className="form-label">
             Product Name (JP)
           </label>
           <input
@@ -68,7 +68,7 @@ const EditProduct = () => {
         </div>
         <div className="row">
           <div className="mb-3 col-6">
-            <label for="quantity" className="form-label">
+            <label htmlFor="quantity" className="form-label">
               Quantity
             </label>
             <input
@@ -86,7 +86,7 @@ const EditProduct = () => {
             />
           </div>
           <div className="mb-3 col-6">
-            <label for="category" className="form-label">
+            <label htmlFor="category" className="form-label">
               Category
             </label>
             <input
@@ -105,7 +105,7 @@ const EditProduct = () => {
           </div>
         </div>
         <div className="mb-3">
-          <label for="details" className="form-label">
+          <label htmlFor="details" className="form-label">
             Details
           </label>
           <textarea

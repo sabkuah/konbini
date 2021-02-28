@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getProductById } from "../network";
+import { getProductById, emptyObject } from "../network";
 import { useParams, Link } from "react-router-dom";
 import placeholder from "../assets/konbini-no-image.png";
-import { isURL } from "validator";
+import isURL from "validator/lib/isURL";
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(emptyObject);
 
   useEffect(() => {
     (async () => {
@@ -20,8 +20,8 @@ const ProductDetail = () => {
       <div className="row">
         {/* LEFT IMAGE */}
         <div className="col-4 d-flex justify-content-center">
-          <div>
-            {product.images?.isURL ? (
+          <div className="d-flex align-items-center">
+            {product?.images && isURL(product?.images) ? (
               <img src={product.images} />
             ) : (
               <img src={placeholder} className="img-fluid" />
@@ -63,6 +63,7 @@ const ProductDetail = () => {
                 value={product.quantity}
                 className="mx-3"
                 style={{ textAlign: "center" }}
+                readOnly
               />
               <button
                 className="btn btn-success"
