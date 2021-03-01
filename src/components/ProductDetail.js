@@ -29,9 +29,9 @@ const ProductDetail = () => {
       const item = await getProductById(productId);
       await setProduct(item);
       isLoading(false);
-      console.log('product>>>>', product);
+      console.log('product>>>>', item);
     })();
-  }, []);
+  }, [productId]);
 
   if (loading) {
     return <Spinner />;

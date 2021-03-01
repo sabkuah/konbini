@@ -15,7 +15,7 @@ const Home = () => {
       //console.log("items>>>", items);
       await setProducts(JSON.parse(items));
       isLoading(false);
-      console.log('products>>>', products);
+      //console.log('products>>>', products);
     })();
   }, []);
 
