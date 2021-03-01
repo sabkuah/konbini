@@ -1,19 +1,19 @@
 import axios from "axios";
 const BASE_URL =
-  "https://bc0a6qqmm3.execute-api.ca-central-1.amazonaws.com/prod";
+    "https://bc0a6qqmm3.execute-api.ca-central-1.amazonaws.com/prod";
 
 //=======================
 //    Empty Object
 //=======================
 
 export const emptyObject = {
-  category: "",
-  details: "",
-  images: "",
-  productId: "empty",
-  productNameEn: "",
-  productNameJp: "",
-  quantity: 0,
+    category: "",
+    details: "",
+    images: "",
+    productId: "empty",
+    productNameEn: "",
+    productNameJp: "",
+    quantity: 0,
 };
 
 //=======================
@@ -21,9 +21,9 @@ export const emptyObject = {
 //=======================
 
 export async function getProducts() {
-  const response = await axios.get(`${BASE_URL}/products`);
+    const response = await axios.get(`${BASE_URL}/products`);
 
-  return response.data.body;
+    return response.data.body;
 }
 
 //=======================
@@ -31,20 +31,20 @@ export async function getProducts() {
 //=======================
 
 export async function getProductById(productId) {
-  const response = await axios.get(`${BASE_URL}/products/${productId}`);
+    const response = await axios.get(`${BASE_URL}/products/${productId}`);
 
-  return response.data;
+    return response.data;
 }
 
 //=======================
 //     Add Product
 //=======================
 export async function postNewProduct(product) {
-  const response = await axios.post(`${BASE_URL}/products`, {
-    product: product,
-  });
-
-  return;
+    const response = await axios.post(`${BASE_URL}/products`, {
+        product: product,
+    });
+    console.log(response);
+    return;
 }
 //=======================
 //   Update Product
@@ -53,3 +53,8 @@ export async function postNewProduct(product) {
 //=======================
 //    Delete Product
 //=======================
+export async function deleteProduct(productId) {
+    const response = await axios.delete(`${BASE_URL}/products/${productId}`);
+
+    return;
+}
