@@ -1,57 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { getProductById, emptyObject, deleteProduct } from "../network";
-import { useParams, Link, useHistory } from "react-router-dom";
-import placeholder from "../assets/konbini-no-image.png";
-import isURL from "validator/lib/isURL";
-import { Modal, Button } from "react-bootstrap";
-import EditProduct from "./EditProduct";
+import React, { useEffect, useState } from 'react';
+import { getProductById, deleteProduct } from '../network';
+import { useParams, useHistory } from 'react-router-dom';
+import placeholder from '../assets/konbini-no-image.png';
+import isURL from 'validator/lib/isURL';
+import { Modal, Button } from 'react-bootstrap';
+import EditProduct from './EditProduct';
+import Spinner from './utils/Spinner';
 
 const ProductDetail = () => {
-    const { productId } = useParams();
-    const [product, setProduct] = useState(emptyObject);
-    const history = useHistory();
+  const { productId } = useParams();
+  const history = useHistory();
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const [product, setProduct] = useState({});
+  const [loading, isLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
-    const handleDeleteProduct = async (productId) => {
-        await deleteProduct(productId);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-        history.push("/");
-    };
+  const handleDeleteProduct = async (productId) => {
+    await deleteProduct(productId);
+    history.push('/');
+  };
 
-    useEffect(() => {
-        (async () => {
-            const item = await getProductById(productId);
-            await setProduct(item);
-            console.log("product>>>>", product);
-        })();
-    }, []);
+  useEffect(() => {
+    (async () => {
+      isLoading(true);
+      const item = await getProductById(productId);
+      await setProduct(item);
+      isLoading(false);
+      console.log('product>>>>', product);
+    })();
+  }, []);
 
+  if (loading) {
+    return <Spinner />;
+  } else {
     return (
-        <div className="container mt-3">
-            <div className="row">
-                {/* LEFT IMAGE */}
-                <div className="col-4 d-flex justify-content-center">
-                    <div className="d-flex align-items-center">
-                        {product?.images && isURL(product?.images) ? (
-                            <img src={product.images} />
-                        ) : (
-                            <img src={placeholder} className="img-fluid" />
-                        )}
-                    </div>
-                </div>
-                {/* RIGHT DETAILS */}
-                <div className="col-7 product-details">
-                    <h2 className="text-center product-name">
-                        {product.productNameEn}
-                    </h2>
-                    <div className="row d-flex justify-content-center my-3">
-                        <Button variant="primary" onClick={handleShow}>
-                            Edit
-                        </Button>
-                        {/* <button className="btn btn-primary mx-3">
+      <div className='container mt-3'>
+        <div className='row'>
+          {/* LEFT IMAGE */}
+          <div className='col-4 d-flex justify-content-center'>
+            <div className='d-flex align-items-center'>
+              {product?.images && isURL(product?.images) ? (
+                <img src={product.images} alt={product.productNameEn} />
+              ) : (
+                <img
+                  src={placeholder}
+                  className='img-fluid'
+                  alt='placeholder'
+                />
+              )}
+            </div>
+          </div>
+          {/* RIGHT DETAILS */}
+          <div className='col-7 product-details'>
+            <h2 className='text-center product-name'>
+              {product.productNameEn}
+            </h2>
+            <div className='row d-flex justify-content-center my-3'>
+              <Button variant='primary' onClick={handleShow}>
+                Edit
+              </Button>
+              {/* <button className="btn btn-primary mx-3">
                             <Link
                                 to={`/products/${product.productId}/edit`}
                                 style={{ color: "white" }}
@@ -59,81 +70,82 @@ const ProductDetail = () => {
                                 Edit
                             </Link>
                         </button> */}
-                        <button
-                            className="btn btn-danger mx-3"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleDeleteProduct(product.productId);
-                            }}
-                        >
-                            Delete
-                        </button>
-                    </div>
-                    <p>ID: {product.productId}</p>
-                    <p>Category: {product.category}</p>
-                    <p>Japanese Name: {product.productNameJp}</p>
-                    <p>Details: {product.details}</p>
-                    {/* FORM FOR UPDATING ITEM QUANTITY */}
-                    {/* should write a diff lambda function for just changing quantity */}
-                    <div className="row col-6 offset-3">
-                        <form>
-                            <button
-                                className="btn btn-danger"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    let num = parseInt(product.quantity);
-                                    setProduct({
-                                        ...product,
-                                        quantity: (num -= 1),
-                                    });
-                                }}
-                            >
-                                -
-                            </button>
-                            <input
-                                value={product.quantity}
-                                className="mx-3"
-                                style={{ textAlign: "center" }}
-                                readOnly
-                            />
-                            <button
-                                className="btn btn-success"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    let num = parseInt(product.quantity);
-                                    setProduct({
-                                        ...product,
-                                        quantity: (num += 1),
-                                    });
-                                }}
-                            >
-                                +
-                            </button>
-                        </form>
-                    </div>
-                </div>
+              <button
+                className='btn btn-danger mx-3'
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteProduct(product.productId);
+                }}
+              >
+                Delete
+              </button>
             </div>
-
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Product</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <EditProduct handleClose={handleClose} item={product} />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <p>ID: {product.productId}</p>
+            <p>Category: {product.category}</p>
+            <p>Japanese Name: {product.productNameJp}</p>
+            <p>Details: {product.details}</p>
+            {/* FORM FOR UPDATING ITEM QUANTITY */}
+            {/* should write a diff lambda function for just changing quantity */}
+            <div className='row col-6 offset-3'>
+              <form>
+                <button
+                  className='btn btn-danger'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    let num = parseInt(product.quantity);
+                    setProduct({
+                      ...product,
+                      quantity: (num -= 1),
+                    });
+                  }}
+                >
+                  -
+                </button>
+                <input
+                  value={product.quantity}
+                  className='mx-3'
+                  style={{ textAlign: 'center' }}
+                  readOnly
+                />
+                <button
+                  className='btn btn-success'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    let num = parseInt(product.quantity);
+                    setProduct({
+                      ...product,
+                      quantity: (num += 1),
+                    });
+                  }}
+                >
+                  +
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
+
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop='static'
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Product</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <EditProduct handleClose={handleClose} item={product} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
+  }
 };
 
 export default ProductDetail;
