@@ -43,7 +43,7 @@ export async function postNewProduct(product) {
     const response = await axios.post(`${BASE_URL}/products`, {
         product: product,
     });
-
+    console.log(response);
     return;
 }
 //=======================
@@ -53,8 +53,8 @@ export async function postNewProduct(product) {
 //=======================
 //    Delete Product
 //=======================
-export async function deleteProduct(product) {
+export async function deleteProduct(productId) {
     const response = await axios.delete(`${BASE_URL}/products/${productId}`);
-    console.log("deleted item >>>>>>", response);
+
     return;
 }
