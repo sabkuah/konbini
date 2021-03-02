@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
+import logo from '../assets/favicon.ico';
 
 const Navigation = () => {
   return (
     <Navbar bg='light' expand='lg'>
       <Navbar.Brand href='/'>
-        <img src='favicon.ico' alt='logo' />
+        <img src={logo} alt='logo' />
         <text className='red-title mx-1'>KONBINI</text>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />

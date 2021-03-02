@@ -55,7 +55,7 @@ const ProductDetail = () => {
           </div>
           {/* RIGHT DETAILS */}
           <div className='col-7 product-details'>
-            <h2 className='text-center title'>{product.productNameEn}</h2>
+            <h2 className='text-center blue-title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
               <Button variant='primary' onClick={handleShow}>
                 Edit
@@ -78,10 +78,20 @@ const ProductDetail = () => {
                 Delete
               </button>
             </div>
-            <p>ID: {product.productId}</p>
-            <p>Category: {product.category}</p>
-            <p>Japanese Name: {product.productNameJp}</p>
-            <p>Details: {product.details}</p>
+            <p>
+              <text className='blue-title'>Id:</text> {product.productId}
+            </p>
+            <p>
+              <text className='blue-title'>Category:</text> {product.category}
+            </p>
+            <p>
+              <text className='blue-title'>Japanese Name:</text>{' '}
+              {product.productNameJp}
+            </p>
+            <p>
+              <text className='blue-title'>Details:</text> <br />
+              {product.details}
+            </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
             {/* should write a diff lambda function for just changing quantity */}
             <div className='row col-6 offset-3'>
