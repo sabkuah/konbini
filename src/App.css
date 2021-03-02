@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Squada+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Squada+One&display=swap');
 
 /* .body {
   background-color: #5786c7;
@@ -11,7 +11,7 @@
 .header h1 {
   color: #d44349;
 
-  font-family: "Squada One", cursive;
+  font-family: 'Squada One', cursive;
   /* font-family: "Carter One", cursive; */
 }
 
@@ -47,13 +47,13 @@
 }
 
 .product-name {
-  font-family: "Squada One", cursive;
+  font-family: 'Squada One', cursive;
   color: #5786c7;
 }
 
 /* ======== NEW PRODUCT FORM ========= */
 
-.prod-form {
+.box-shadow {
   padding: 3%;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;

@@ -19,7 +19,7 @@ const NewProduct = () => {
   };
 
   return (
-    <div className='col-6 offset-3 prod-form'>
+    <div className='col-6 offset-3 box-shadow'>
       <form onSubmit={handleAddProduct}>
         <div className='mb-3'>
           <label htmlFor='productNameEn' className='form-label'>
