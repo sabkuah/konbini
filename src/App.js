@@ -24,14 +24,14 @@ function App() {
     }, [isAuthenticated]);
     return (
         <Router>
-            <Navigation />
+            <Navigation isAuthenticated={isAuthenticated} />
             <Header />
             <Switch>
                 <Route path="/register">
                     <Register authenticate={authenticateUser} />
                 </Route>
                 <Route path="/login">
-                    <Login />
+                    <Login authenticate={authenticateUser} />
                 </Route>
                 <GuardedRoute
                     path="/products/new"

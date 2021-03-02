@@ -9,6 +9,13 @@ const Register = ({ authenticate }) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const history = useHistory();
 
+    const clearFields = () => {
+        setUserName("");
+        setPassword("");
+        setConfirmPassword("");
+        setEmail("");
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -24,6 +31,7 @@ const Register = ({ authenticate }) => {
                 },
             });
             authenticate(true);
+            clearFields();
             history.push("/products/new");
             //Redirect to last page user was on
         } catch (e) {
