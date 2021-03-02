@@ -12,7 +12,7 @@ const Login = () => {
 
   return (
     <div className='col-6 offset-3 box-shadow'>
-      <h1>Login</h1>
+      <h2 className='title text-center'>Login</h2>
       <form onSubmit={handleSubmit}>
         <p className='control'>
           <input
@@ -38,7 +38,7 @@ const Login = () => {
           />
         </p>
 
-        <div className='control'>
+        <div className='control d-flex justify-content-center'>
           <button className='button is-primary' type='submit'>
             Submit
           </button>

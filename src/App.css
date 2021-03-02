@@ -5,15 +5,24 @@
   background-color: #5786c7;
   height: 100vh;
 } */
+/* ======== GENERAL STYLES ========= */
+.box-shadow {
+  padding: 3%;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.blue-title {
+  font-family: 'Squada One', cursive;
+  color: #5786c7;
+}
+
+.red-title {
+  font-family: 'Squada One', cursive;
+  color: #d44349;
+}
 
 /* ======== HEADER ========= */
-
-.header h1 {
-  color: #d44349;
-
-  font-family: 'Squada One', cursive;
-  /* font-family: "Carter One", cursive; */
-}
 
 .header {
   min-height: 10vh;
@@ -42,19 +51,6 @@
   padding: 5%;
   padding-left: 2%;
   border-radius: 1%;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
-}
-
-.product-name {
-  font-family: 'Squada One', cursive;
-  color: #5786c7;
-}
-
-/* ======== NEW PRODUCT FORM ========= */
-
-.box-shadow {
-  padding: 3%;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }

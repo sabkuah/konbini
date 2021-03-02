@@ -55,9 +55,7 @@ const ProductDetail = () => {
           </div>
           {/* RIGHT DETAILS */}
           <div className='col-7 product-details'>
-            <h2 className='text-center product-name'>
-              {product.productNameEn}
-            </h2>
+            <h2 className='text-center title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
               <Button variant='primary' onClick={handleShow}>
                 Edit

@@ -14,8 +14,7 @@ const Register = () => {
 
   return (
     <div className='col-6 offset-3 box-shadow'>
-      <h1>Register</h1>
-
+      <h2 className='title text-center'>Register</h2>
       <form onSubmit={handleSubmit}>
         <div className='mb-3'>
           <input
@@ -61,7 +60,7 @@ const Register = () => {
             required
           />
         </p>
-        <div className='control'>
+        <div className='control d-flex justify-content-center'>
           <button
             className='button is-primary'
             type='submit'
