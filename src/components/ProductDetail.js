@@ -34,7 +34,7 @@ const ProductDetail = ({ isAuthenticated }) => {
   //For updating product quantity
   useEffect(() => {
     updateProduct(productId, product);
-    console.log('after number', product.quantity);
+    // eslint-disable-next-line
   }, [product.quantity]);
 
   //For getting product details
@@ -46,7 +46,7 @@ const ProductDetail = ({ isAuthenticated }) => {
       isLoading(false);
       console.log('product>>>>', item);
     })();
-  }, [productId]);
+  }, [productId, show]);
 
   if (loading) {
     return <Spinner />;

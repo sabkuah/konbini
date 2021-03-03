@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const EditProduct = ({ handleClose, item }) => {
   const [product, setProduct] = useState(item);
-  const productId = useParams.productId;
+  const { productId } = useParams();
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
