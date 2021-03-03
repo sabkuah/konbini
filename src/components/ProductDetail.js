@@ -7,7 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 import EditProduct from './EditProduct';
 import Spinner from './utils/Spinner';
 
-const ProductDetail = () => {
+const ProductDetail = ({ isAuthenticated }) => {
   const { productId } = useParams();
   const history = useHistory();
 
@@ -57,26 +57,25 @@ const ProductDetail = () => {
           <div className='col-7 product-details'>
             <h2 className='text-center blue-title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
-              <Button variant='primary' onClick={handleShow}>
-                Edit
-              </Button>
-              {/* <button className="btn btn-primary mx-3">
-                            <Link
-                                to={`/products/${product.productId}/edit`}
-                                style={{ color: "white" }}
-                            >
-                                Edit
-                            </Link>
-                        </button> */}
-              <button
-                className='btn btn-danger mx-3'
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDeleteProduct(product.productId);
-                }}
-              >
-                Delete
-              </button>
+              {isAuthenticated ? (
+                <>
+                  <Button variant='primary' onClick={handleShow}>
+                    Edit
+                  </Button>
+
+                  <button
+                    className='btn btn-danger mx-3'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleDeleteProduct(product.productId);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </>
+              ) : (
+                ''
+              )}
             </div>
             <p>
               <text className='blue-title'>Id:</text> {product.productId}
@@ -94,42 +93,46 @@ const ProductDetail = () => {
             </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
             {/* should write a diff lambda function for just changing quantity */}
-            <div className='row col-6 offset-3'>
-              <form>
-                <button
-                  className='btn btn-danger'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    let num = parseInt(product.quantity);
-                    setProduct({
-                      ...product,
-                      quantity: (num -= 1),
-                    });
-                  }}
-                >
-                  -
-                </button>
-                <input
-                  value={product.quantity}
-                  className='mx-3'
-                  style={{ textAlign: 'center' }}
-                  readOnly
-                />
-                <button
-                  className='btn btn-success'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    let num = parseInt(product.quantity);
-                    setProduct({
-                      ...product,
-                      quantity: (num += 1),
-                    });
-                  }}
-                >
-                  +
-                </button>
-              </form>
-            </div>
+            {isAuthenticated ? (
+              <div className='row col-6 offset-3'>
+                <form>
+                  <button
+                    className='btn btn-danger'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      let num = parseInt(product.quantity);
+                      setProduct({
+                        ...product,
+                        quantity: (num -= 1),
+                      });
+                    }}
+                  >
+                    -
+                  </button>
+                  <input
+                    value={product.quantity}
+                    className='mx-3'
+                    style={{ textAlign: 'center' }}
+                    readOnly
+                  />
+                  <button
+                    className='btn btn-success'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      let num = parseInt(product.quantity);
+                      setProduct({
+                        ...product,
+                        quantity: (num += 1),
+                      });
+                    }}
+                  >
+                    +
+                  </button>
+                </form>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
 
