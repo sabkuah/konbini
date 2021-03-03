@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { updateProduct } from '../network';
+import { useParams } from 'react-router-dom';
 
 const EditProduct = ({ handleClose, item }) => {
   const [product, setProduct] = useState(item);
+  const { productId } = useParams();
 
-  const editProduct = async () => {
-    console.log('edit form submitted');
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+    console.log('item being added', product);
+    await updateProduct(productId, product);
     handleClose();
   };
 
   return (
-    <form onSubmit={editProduct}>
+    <form onSubmit={handleUpdateProduct}>
       <div className='mb-3'>
         <label htmlFor='productNameEn' className='form-label'>
           Product Name (EN)

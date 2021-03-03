@@ -1,41 +1,60 @@
-import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import logo from "../assets/favicon.ico";
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import logo from '../assets/favicon.ico';
+import { NavLink } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
-const Navigation = ({ isAuthenticated }) => {
-    return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">
-                <img src={logo} alt="logo" />
-                <text className="red-title mx-1">KONBINI</text>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/about" className="blue-title">
-                        ABOUT
-                    </Nav.Link>
-                    <Nav.Link href="/products/new" className="blue-title">
-                        NEW PRODUCT
-                    </Nav.Link>
-                    {isAuthenticated ? (
-                        <Nav.Link href="/login" className="blue-title">
-                            Logout
-                        </Nav.Link>
-                    ) : (
-                        <>
-                            <Nav.Link href="/login" className="blue-title">
-                                LOGIN
-                            </Nav.Link>
-                            <Nav.Link href="/register" className="blue-title">
-                                REGISTER
-                            </Nav.Link>
-                        </>
-                    )}
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-    );
+const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
+  const handleLogOut = async () => {
+    try {
+      await Auth.signOut();
+      setIsAuthenticated(false);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  return (
+    <Navbar bg='light' expand='lg'>
+      <Navbar.Brand>
+        <NavLink to='/'>
+          <img src={logo} alt='logo' />
+          <text className='red-title mx-1'>KONBINI</text>
+        </NavLink>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='mr-auto'>
+          <NavLink to='/about' className='blue-title px-2'>
+            ABOUT
+          </NavLink>
+          <NavLink to='/products/new' className='blue-title px-2'>
+            NEW PRODUCT
+          </NavLink>
+          {isAuthenticated ? (
+            <NavLink
+              to='/'
+              className='blue-title px-2'
+              onClick={() => {
+                handleLogOut();
+              }}
+            >
+              LOGOUT
+            </NavLink>
+          ) : (
+            <>
+              <NavLink to='/login' className='blue-title px-2'>
+                LOGIN
+              </NavLink>
+              <NavLink to='/register' className='blue-title px-2'>
+                REGISTER
+              </NavLink>
+            </>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 };
 
 export default Navigation;

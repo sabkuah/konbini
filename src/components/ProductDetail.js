@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getProductById, deleteProduct } from '../network';
+import { getProductById, deleteProduct, updateProduct } from '../network';
 import { useParams, useHistory } from 'react-router-dom';
 import placeholder from '../assets/konbini-no-image.png';
 import isURL from 'validator/lib/isURL';
@@ -7,7 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 import EditProduct from './EditProduct';
 import Spinner from './utils/Spinner';
 
-const ProductDetail = () => {
+const ProductDetail = ({ isAuthenticated }) => {
   const { productId } = useParams();
   const history = useHistory();
 
@@ -18,11 +18,26 @@ const ProductDetail = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = async () => {
     await deleteProduct(productId);
     history.push('/');
   };
 
+  const handleUpdateQuantity = async () => {
+    console.log('before number', product.quantity);
+    await setProduct({
+      ...product,
+      quantity: parseInt(product.quantity) + 1,
+    });
+  };
+
+  //For updating product quantity
+  useEffect(() => {
+    updateProduct(productId, product);
+    // eslint-disable-next-line
+  }, [product.quantity]);
+
+  //For getting product details
   useEffect(() => {
     (async () => {
       isLoading(true);
@@ -31,7 +46,7 @@ const ProductDetail = () => {
       isLoading(false);
       console.log('product>>>>', item);
     })();
-  }, [productId]);
+  }, [productId, show]);
 
   if (loading) {
     return <Spinner />;
@@ -57,26 +72,25 @@ const ProductDetail = () => {
           <div className='col-7 product-details'>
             <h2 className='text-center blue-title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
-              <Button variant='primary' onClick={handleShow}>
-                Edit
-              </Button>
-              {/* <button className="btn btn-primary mx-3">
-                            <Link
-                                to={`/products/${product.productId}/edit`}
-                                style={{ color: "white" }}
-                            >
-                                Edit
-                            </Link>
-                        </button> */}
-              <button
-                className='btn btn-danger mx-3'
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDeleteProduct(product.productId);
-                }}
-              >
-                Delete
-              </button>
+              {isAuthenticated ? (
+                <>
+                  <Button variant='primary' onClick={handleShow}>
+                    Edit
+                  </Button>
+
+                  <button
+                    className='btn btn-danger mx-3'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleDeleteProduct();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </>
+              ) : (
+                ''
+              )}
             </div>
             <p>
               <text className='blue-title'>Id:</text> {product.productId}
@@ -94,42 +108,43 @@ const ProductDetail = () => {
             </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
             {/* should write a diff lambda function for just changing quantity */}
-            <div className='row col-6 offset-3'>
-              <form>
-                <button
-                  className='btn btn-danger'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    let num = parseInt(product.quantity);
-                    setProduct({
-                      ...product,
-                      quantity: (num -= 1),
-                    });
-                  }}
-                >
-                  -
-                </button>
-                <input
-                  value={product.quantity}
-                  className='mx-3'
-                  style={{ textAlign: 'center' }}
-                  readOnly
-                />
-                <button
-                  className='btn btn-success'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    let num = parseInt(product.quantity);
-                    setProduct({
-                      ...product,
-                      quantity: (num += 1),
-                    });
-                  }}
-                >
-                  +
-                </button>
-              </form>
-            </div>
+            {isAuthenticated ? (
+              <div className='row col-6 offset-3'>
+                <form>
+                  <button
+                    className='btn btn-danger'
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      let num = parseInt(product.quantity);
+                      await setProduct({
+                        ...product,
+                        quantity: (num -= 1),
+                      });
+                      handleUpdateQuantity();
+                    }}
+                  >
+                    -
+                  </button>
+                  <input
+                    value={product.quantity}
+                    className='mx-3 form-control'
+                    style={{ textAlign: 'center' }}
+                    readOnly
+                  />
+                  <button
+                    className='btn btn-success'
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      handleUpdateQuantity();
+                    }}
+                  >
+                    +
+                  </button>
+                </form>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
 
