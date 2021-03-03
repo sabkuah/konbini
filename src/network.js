@@ -50,6 +50,24 @@ export async function postNewProduct(product) {
 //   Update Product
 //=======================
 
+export async function updateProduct(productId, product) {
+  const response = await axios.put(`${BASE_URL}/products/${productId}`, {
+    product: product,
+  });
+  console.log(response);
+  return;
+}
+
+// export async function updateQuantity(productId, quantity) {
+//   const response = await axios.patch(`${BASE_URL}/products/${productId}`, {
+//     product: {
+//       quantity: quantity,
+//     },
+//   });
+//   console.log(response);
+//   return;
+// }
+
 //=======================
 //    Delete Product
 //=======================

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getProductById, deleteProduct } from '../network';
+import { getProductById, deleteProduct, updateProduct } from '../network';
 import { useParams, useHistory } from 'react-router-dom';
 import placeholder from '../assets/konbini-no-image.png';
 import isURL from 'validator/lib/isURL';
@@ -18,11 +18,26 @@ const ProductDetail = ({ isAuthenticated }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = async () => {
     await deleteProduct(productId);
     history.push('/');
   };
 
+  const handleUpdateQuantity = async () => {
+    console.log('before number', product.quantity);
+    await setProduct({
+      ...product,
+      quantity: parseInt(product.quantity) + 1,
+    });
+  };
+
+  //For updating product quantity
+  useEffect(() => {
+    updateProduct(productId, product);
+    console.log('after number', product.quantity);
+  }, [product.quantity]);
+
+  //For getting product details
   useEffect(() => {
     (async () => {
       isLoading(true);
@@ -67,7 +82,7 @@ const ProductDetail = ({ isAuthenticated }) => {
                     className='btn btn-danger mx-3'
                     onClick={(e) => {
                       e.preventDefault();
-                      handleDeleteProduct(product.productId);
+                      handleDeleteProduct();
                     }}
                   >
                     Delete
@@ -98,32 +113,29 @@ const ProductDetail = ({ isAuthenticated }) => {
                 <form>
                   <button
                     className='btn btn-danger'
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
                       let num = parseInt(product.quantity);
-                      setProduct({
+                      await setProduct({
                         ...product,
                         quantity: (num -= 1),
                       });
+                      handleUpdateQuantity();
                     }}
                   >
                     -
                   </button>
                   <input
                     value={product.quantity}
-                    className='mx-3'
+                    className='mx-3 form-control'
                     style={{ textAlign: 'center' }}
                     readOnly
                   />
                   <button
                     className='btn btn-success'
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
-                      let num = parseInt(product.quantity);
-                      setProduct({
-                        ...product,
-                        quantity: (num += 1),
-                      });
+                      handleUpdateQuantity();
                     }}
                   >
                     +
