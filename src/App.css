@@ -57,15 +57,11 @@
 
 /* ======== FOOTER PAGE ========= */
 
-.page-container {
+/* .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
-
-.content-wrap {
-    flex: 1;
-}
+    max-height: 100vh;
+} */
 
 .red-footer-title {
     font-family: "Squada One", cursive;
@@ -74,12 +70,13 @@
 
 .list-style {
     list-style-type: none;
+    padding-left: 0%;
 }
 
 .main-footer {
     background-color: #f8f9fa;
     color: #5786c7;
-    padding-top: 2em;
-    position: relative;
-    width: auto;
+    /* padding-top: 2em; */
+    /* position: relative; */
+    /* width: auto; */
 }

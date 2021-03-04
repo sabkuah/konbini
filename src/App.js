@@ -12,6 +12,7 @@ import Login from "./components/auth/Login";
 import GuardedRoute from "./components/auth/GuardedRoute";
 import KonbiniState from "./context/konbini/KonbiniState";
 import UserState from "./context/user/UserState";
+import Footer from "./components/footer";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                             <Home />
                         </Route>
                     </Switch>
+                    <Footer />
                 </Router>
             </KonbiniState>
         </UserState>
