@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getProductById, deleteProduct, updateProduct } from '../network';
+import React, { useEffect, useState, useContext } from 'react';
+import KonbiniContext from '../context/konbiniContext';
+//import { deleteProduct, updateProduct } from '../network';
 import { useParams, useHistory } from 'react-router-dom';
 import placeholder from '../assets/konbini-no-image.png';
 import isURL from 'validator/lib/isURL';
@@ -8,11 +9,18 @@ import EditProduct from './EditProduct';
 import Spinner from './utils/Spinner';
 
 const ProductDetail = ({ isAuthenticated }) => {
+  const konbiniContext = useContext(KonbiniContext);
+  const {
+    product,
+    loading,
+    setLoading,
+    getProductById,
+    deleteProduct,
+    updateProduct,
+  } = konbiniContext;
   const { productId } = useParams();
   const history = useHistory();
 
-  const [product, setProduct] = useState({});
-  const [loading, isLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -25,7 +33,7 @@ const ProductDetail = ({ isAuthenticated }) => {
 
   const handleUpdateQuantity = async () => {
     console.log('before number', product.quantity);
-    await setProduct({
+    await updateProduct({
       ...product,
       quantity: parseInt(product.quantity) + 1,
     });
@@ -40,13 +48,11 @@ const ProductDetail = ({ isAuthenticated }) => {
   //For getting product details
   useEffect(() => {
     (async () => {
-      isLoading(true);
-      const item = await getProductById(productId);
-      await setProduct(item);
-      isLoading(false);
-      console.log('product>>>>', item);
+      setLoading();
+      getProductById(productId);
+      //console.log('product>>>>', product);
     })();
-  }, [productId, show]);
+  }, [productId]);
 
   if (loading) {
     return <Spinner />;
@@ -93,17 +99,18 @@ const ProductDetail = ({ isAuthenticated }) => {
               )}
             </div>
             <p>
-              <text className='blue-title'>Id:</text> {product.productId}
+              <strong className='blue-title'>Id:</strong> {product.productId}
             </p>
             <p>
-              <text className='blue-title'>Category:</text> {product.category}
+              <strong className='blue-title'>Category:</strong>{' '}
+              {product.category}
             </p>
             <p>
-              <text className='blue-title'>Japanese Name:</text>{' '}
+              <strong className='blue-title'>Japanese Name:</strong>{' '}
               {product.productNameJp}
             </p>
             <p>
-              <text className='blue-title'>Details:</text> <br />
+              <strong className='blue-title'>Details:</strong> <br />
               {product.details}
             </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
@@ -115,11 +122,6 @@ const ProductDetail = ({ isAuthenticated }) => {
                     className='btn btn-danger'
                     onClick={async (e) => {
                       e.preventDefault();
-                      let num = parseInt(product.quantity);
-                      await setProduct({
-                        ...product,
-                        quantity: (num -= 1),
-                      });
                       handleUpdateQuantity();
                     }}
                   >

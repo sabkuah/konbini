@@ -19,7 +19,7 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
       <Navbar.Brand>
         <NavLink to='/'>
           <img src={logo} alt='logo' />
-          <text className='red-title mx-1'>KONBINI</text>
+          <strong className='red-title mx-1'>KONBINI</strong>
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />

@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import KonbiniContext from '../context/konbiniContext';
 import { updateProduct } from '../network';
 import { useParams } from 'react-router-dom';
 
-const EditProduct = ({ handleClose, item }) => {
-  const [product, setProduct] = useState(item);
+const EditProduct = ({ handleClose }) => {
+  const konbiniContext = useContext(KonbiniContext);
+  const { updateProduct, product } = konbiniContext;
+  const [editedProduct, setEditedProduct] = useState({});
   const { productId } = useParams();
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     console.log('item being added', product);
-    await updateProduct(productId, product);
+    await updateProduct(productId, editedProduct);
     handleClose();
   };
 
@@ -26,7 +29,7 @@ const EditProduct = ({ handleClose, item }) => {
           name='product[productNameEn]'
           value={product.productNameEn}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               productNameEn: e.target.value,
             });
@@ -44,7 +47,7 @@ const EditProduct = ({ handleClose, item }) => {
           name='product[images]'
           value={product.images}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               images: e.target.value,
             });
@@ -63,7 +66,7 @@ const EditProduct = ({ handleClose, item }) => {
           name='product[productNameJp]'
           value={product.productNameJp}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               productNameJp: e.target.value,
             });
@@ -82,7 +85,7 @@ const EditProduct = ({ handleClose, item }) => {
             name='product[quantity]'
             value={product.quantity}
             onChange={(e) => {
-              setProduct({
+              setEditedProduct({
                 ...product,
                 quantity: e.target.value,
               });
@@ -100,7 +103,7 @@ const EditProduct = ({ handleClose, item }) => {
             name='product[category]'
             value={product.category}
             onChange={(e) => {
-              setProduct({
+              setEditedProduct({
                 ...product,
                 category: e.target.value,
               });
@@ -118,7 +121,7 @@ const EditProduct = ({ handleClose, item }) => {
           name='product[details]'
           value={product.details}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               details: e.target.value,
             });
