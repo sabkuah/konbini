@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { getProducts } from '../network';
+import React, { useEffect, useContext } from 'react';
+import KonbiniContext from '../context/konbini/konbiniContext';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import Spinner from './utils/Spinner';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, isLoading] = useState(false);
+  const konbiniContext = useContext(KonbiniContext);
+  const { getProducts, setLoading, products, loading } = konbiniContext;
 
   useEffect(() => {
-    (async () => {
-      isLoading(true);
-      const items = await getProducts();
-      //console.log("items>>>", items);
-      await setProducts(JSON.parse(items));
-      isLoading(false);
-      //console.log('products>>>', products);
-    })();
+    setLoading();
+    getProducts();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {

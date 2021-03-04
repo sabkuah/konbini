@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
-import { postNewProduct } from '../network';
+import React, { useState, useContext } from 'react';
+import KonbiniContext from '../context/konbini/konbiniContext';
+//import { postNewProduct } from '../network';
 import { useHistory } from 'react-router-dom';
 import uuid from 'react-uuid';
 
 const NewProduct = () => {
   //need to create a function that randomly generates productIds
-
+  const konbiniContext = useContext(KonbiniContext);
+  const { addProduct } = konbiniContext;
   const history = useHistory();
-
   const [newProduct, setNewProduct] = useState({});
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
-    const newId = await uuid();
-    await setNewProduct({ ...newProduct, productId: newId });
-    console.log(newProduct);
-    await postNewProduct(newProduct);
+    const newId = uuid();
+    const newItem = { ...newProduct, productId: newId };
+    //setNewProduct({ ...newProduct, productId: newId });
+    await addProduct(newItem);
     history.push('/');
   };
 

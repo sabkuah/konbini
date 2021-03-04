@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import UserContext from '../../context/user/userContext';
 import { useHistory } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
-const Register = ({ setIsAuthenticated }) => {
+const Register = () => {
+  const userContext = useContext(UserContext);
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +32,7 @@ const Register = ({ setIsAuthenticated }) => {
           email: email,
         },
       });
-      setIsAuthenticated(true);
+      userContext.loginUser();
       clearFields();
       history.push('/products/new');
       //Redirect to last page user was on
