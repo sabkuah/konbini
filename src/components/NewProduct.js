@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import KonbiniContext from '../context/konbiniContext';
+import KonbiniContext from '../context/konbini/konbiniContext';
 //import { postNewProduct } from '../network';
 import { useHistory } from 'react-router-dom';
 import uuid from 'react-uuid';
@@ -14,10 +14,8 @@ const NewProduct = () => {
   const handleAddProduct = async (e) => {
     e.preventDefault();
     const newId = uuid();
-    console.log('ID>>>', newId);
     const newItem = { ...newProduct, productId: newId };
     //setNewProduct({ ...newProduct, productId: newId });
-    console.log('newprod being added', newItem);
     await addProduct(newItem);
     history.push('/');
   };

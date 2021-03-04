@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import KonbiniContext from '../context/konbiniContext';
+import React, { useEffect, useContext } from 'react';
+import KonbiniContext from '../context/konbini/konbiniContext';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import Spinner from './utils/Spinner';
@@ -11,6 +11,7 @@ const Home = () => {
   useEffect(() => {
     setLoading();
     getProducts();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {

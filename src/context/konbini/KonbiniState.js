@@ -9,11 +9,10 @@ import {
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
   SET_LOADING,
-} from '../types';
+} from '../../types';
 
 const KonbiniState = (props) => {
   const initialState = {
-    isAuthenticated: false,
     loading: false,
     products: [],
     product: {},
@@ -58,6 +57,7 @@ const KonbiniState = (props) => {
     const response = await axios.put(`${BASE_URL}/products/${productId}`, {
       product: product,
     });
+    console.log('update product response:', response);
     dispatch({
       type: UPDATE_PRODUCT,
     });
@@ -95,7 +95,6 @@ const KonbiniState = (props) => {
   return (
     <KonbiniContext.Provider
       value={{
-        isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         products: state.products,
         product: state.product,

@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
-import KonbiniContext from '../context/konbiniContext';
-import { updateProduct } from '../network';
+import KonbiniContext from '../context/konbini/konbiniContext';
 import { useParams } from 'react-router-dom';
 
 const EditProduct = ({ handleClose }) => {
   const konbiniContext = useContext(KonbiniContext);
   const { updateProduct, product } = konbiniContext;
-  const [editedProduct, setEditedProduct] = useState({});
+  const [editedProduct, setEditedProduct] = useState({ product });
   const { productId } = useParams();
 
   const handleUpdateProduct = async (e) => {
@@ -27,7 +26,7 @@ const EditProduct = ({ handleClose }) => {
           className='form-control'
           id='productNameEn'
           name='product[productNameEn]'
-          value={product.productNameEn}
+          value={editedProduct.productNameEn}
           onChange={(e) => {
             setEditedProduct({
               ...product,
@@ -45,7 +44,7 @@ const EditProduct = ({ handleClose }) => {
           className='form-control'
           id='images'
           name='product[images]'
-          value={product.images}
+          value={editedProduct.images}
           onChange={(e) => {
             setEditedProduct({
               ...product,
@@ -64,7 +63,7 @@ const EditProduct = ({ handleClose }) => {
           className='form-control'
           id='productNameJp'
           name='product[productNameJp]'
-          value={product.productNameJp}
+          value={editedProduct.productNameJp}
           onChange={(e) => {
             setEditedProduct({
               ...product,
@@ -83,7 +82,7 @@ const EditProduct = ({ handleClose }) => {
             className='form-control'
             id='quantity'
             name='product[quantity]'
-            value={product.quantity}
+            value={editedProduct.quantity}
             onChange={(e) => {
               setEditedProduct({
                 ...product,
@@ -101,7 +100,7 @@ const EditProduct = ({ handleClose }) => {
             className='form-control'
             id='category'
             name='product[category]'
-            value={product.category}
+            value={editedProduct.category}
             onChange={(e) => {
               setEditedProduct({
                 ...product,
@@ -119,7 +118,7 @@ const EditProduct = ({ handleClose }) => {
           className='form-control'
           id='details'
           name='product[details]'
-          value={product.details}
+          value={editedProduct.details}
           onChange={(e) => {
             setEditedProduct({
               ...product,

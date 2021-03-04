@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../context/user/userContext';
 import { Navbar, Nav } from 'react-bootstrap';
 import logo from '../assets/favicon.ico';
 import { NavLink } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
-const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
+const Navigation = () => {
+  const userContext = useContext(UserContext);
+
   const handleLogOut = async () => {
     try {
       await Auth.signOut();
-      setIsAuthenticated(false);
+      userContext.logoutUser();
     } catch (e) {
       console.log(e.message);
     }
@@ -31,7 +34,7 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
           <NavLink to='/products/new' className='blue-title px-2'>
             NEW PRODUCT
           </NavLink>
-          {isAuthenticated ? (
+          {userContext.isAuthenticated ? (
             <NavLink
               to='/'
               className='blue-title px-2'

@@ -5,9 +5,9 @@ import {
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
   SET_LOADING,
-} from '../types';
+} from '../../types';
 
-export default (state, action) => {
+const KonbiniReducer = (state, action) => {
   switch (action.type) {
     case SCAN_PRODUCTS:
       return {
@@ -42,3 +42,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default KonbiniReducer;

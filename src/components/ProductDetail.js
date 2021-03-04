@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import KonbiniContext from '../context/konbiniContext';
-//import { deleteProduct, updateProduct } from '../network';
+import KonbiniContext from '../context/konbini/konbiniContext';
+import UserContext from '../context/user/userContext';
 import { useParams, useHistory } from 'react-router-dom';
 import placeholder from '../assets/konbini-no-image.png';
 import isURL from 'validator/lib/isURL';
@@ -8,8 +8,9 @@ import { Modal, Button } from 'react-bootstrap';
 import EditProduct from './EditProduct';
 import Spinner from './utils/Spinner';
 
-const ProductDetail = ({ isAuthenticated }) => {
+const ProductDetail = () => {
   const konbiniContext = useContext(KonbiniContext);
+  const userContext = useContext(UserContext);
   const {
     product,
     loading,
@@ -42,7 +43,7 @@ const ProductDetail = ({ isAuthenticated }) => {
   //For updating product quantity
   useEffect(() => {
     updateProduct(productId, product);
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, [product.quantity]);
 
   //For getting product details
@@ -50,9 +51,9 @@ const ProductDetail = ({ isAuthenticated }) => {
     (async () => {
       setLoading();
       getProductById(productId);
-      //console.log('product>>>>', product);
     })();
-  }, [productId]);
+    //eslint-disable-next-line
+  }, [productId, show]);
 
   if (loading) {
     return <Spinner />;
@@ -78,7 +79,7 @@ const ProductDetail = ({ isAuthenticated }) => {
           <div className='col-7 product-details'>
             <h2 className='text-center blue-title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
-              {isAuthenticated ? (
+              {userContext.isAuthenticated ? (
                 <>
                   <Button variant='primary' onClick={handleShow}>
                     Edit
@@ -115,7 +116,7 @@ const ProductDetail = ({ isAuthenticated }) => {
             </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
             {/* should write a diff lambda function for just changing quantity */}
-            {isAuthenticated ? (
+            {userContext.isAuthenticated ? (
               <div className='row col-6 offset-3'>
                 <form>
                   <button
