@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import UserContext from '../../context/user/userContext';
 import { useHistory } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
+  const userContext = useContext(UserContext);
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
@@ -14,7 +16,7 @@ const Login = ({ setIsAuthenticated }) => {
         username,
         password,
       });
-      setIsAuthenticated(true);
+      userContext.loginUser();
       setUserName('');
       setPassword('');
       history.push('/products/new');

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { updateProduct } from '../network';
+import React, { useState, useContext } from 'react';
+import KonbiniContext from '../context/konbini/konbiniContext';
 import { useParams } from 'react-router-dom';
 
-const EditProduct = ({ handleClose, item }) => {
-  const [product, setProduct] = useState(item);
+const EditProduct = ({ handleClose }) => {
+  const konbiniContext = useContext(KonbiniContext);
+  const { updateProduct, product } = konbiniContext;
+  const [editedProduct, setEditedProduct] = useState({ product });
   const { productId } = useParams();
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     console.log('item being added', product);
-    await updateProduct(productId, product);
+    await updateProduct(productId, editedProduct);
     handleClose();
   };
 
@@ -24,9 +26,9 @@ const EditProduct = ({ handleClose, item }) => {
           className='form-control'
           id='productNameEn'
           name='product[productNameEn]'
-          value={product.productNameEn}
+          value={editedProduct.productNameEn}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               productNameEn: e.target.value,
             });
@@ -42,9 +44,9 @@ const EditProduct = ({ handleClose, item }) => {
           className='form-control'
           id='images'
           name='product[images]'
-          value={product.images}
+          value={editedProduct.images}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               images: e.target.value,
             });
@@ -61,9 +63,9 @@ const EditProduct = ({ handleClose, item }) => {
           className='form-control'
           id='productNameJp'
           name='product[productNameJp]'
-          value={product.productNameJp}
+          value={editedProduct.productNameJp}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               productNameJp: e.target.value,
             });
@@ -80,9 +82,9 @@ const EditProduct = ({ handleClose, item }) => {
             className='form-control'
             id='quantity'
             name='product[quantity]'
-            value={product.quantity}
+            value={editedProduct.quantity}
             onChange={(e) => {
-              setProduct({
+              setEditedProduct({
                 ...product,
                 quantity: e.target.value,
               });
@@ -98,9 +100,9 @@ const EditProduct = ({ handleClose, item }) => {
             className='form-control'
             id='category'
             name='product[category]'
-            value={product.category}
+            value={editedProduct.category}
             onChange={(e) => {
-              setProduct({
+              setEditedProduct({
                 ...product,
                 category: e.target.value,
               });
@@ -116,9 +118,9 @@ const EditProduct = ({ handleClose, item }) => {
           className='form-control'
           id='details'
           name='product[details]'
-          value={product.details}
+          value={editedProduct.details}
           onChange={(e) => {
-            setProduct({
+            setEditedProduct({
               ...product,
               details: e.target.value,
             });

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getProductById, deleteProduct, updateProduct } from '../network';
+import React, { useEffect, useState, useContext } from 'react';
+import KonbiniContext from '../context/konbini/konbiniContext';
+import UserContext from '../context/user/userContext';
 import { useParams, useHistory } from 'react-router-dom';
 import placeholder from '../assets/konbini-no-image.png';
 import isURL from 'validator/lib/isURL';
@@ -7,12 +8,20 @@ import { Modal, Button } from 'react-bootstrap';
 import EditProduct from './EditProduct';
 import Spinner from './utils/Spinner';
 
-const ProductDetail = ({ isAuthenticated }) => {
+const ProductDetail = () => {
+  const konbiniContext = useContext(KonbiniContext);
+  const userContext = useContext(UserContext);
+  const {
+    product,
+    loading,
+    setLoading,
+    getProductById,
+    deleteProduct,
+    updateProduct,
+  } = konbiniContext;
   const { productId } = useParams();
   const history = useHistory();
 
-  const [product, setProduct] = useState({});
-  const [loading, isLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -25,7 +34,7 @@ const ProductDetail = ({ isAuthenticated }) => {
 
   const handleUpdateQuantity = async () => {
     console.log('before number', product.quantity);
-    await setProduct({
+    await updateProduct({
       ...product,
       quantity: parseInt(product.quantity) + 1,
     });
@@ -34,18 +43,16 @@ const ProductDetail = ({ isAuthenticated }) => {
   //For updating product quantity
   useEffect(() => {
     updateProduct(productId, product);
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, [product.quantity]);
 
   //For getting product details
   useEffect(() => {
     (async () => {
-      isLoading(true);
-      const item = await getProductById(productId);
-      await setProduct(item);
-      isLoading(false);
-      console.log('product>>>>', item);
+      setLoading();
+      getProductById(productId);
     })();
+    //eslint-disable-next-line
   }, [productId, show]);
 
   if (loading) {
@@ -72,7 +79,7 @@ const ProductDetail = ({ isAuthenticated }) => {
           <div className='col-7 product-details'>
             <h2 className='text-center blue-title'>{product.productNameEn}</h2>
             <div className='row d-flex justify-content-center my-3'>
-              {isAuthenticated ? (
+              {userContext.isAuthenticated ? (
                 <>
                   <Button variant='primary' onClick={handleShow}>
                     Edit
@@ -93,33 +100,29 @@ const ProductDetail = ({ isAuthenticated }) => {
               )}
             </div>
             <p>
-              <text className='blue-title'>Id:</text> {product.productId}
+              <strong className='blue-title'>Id:</strong> {product.productId}
             </p>
             <p>
-              <text className='blue-title'>Category:</text> {product.category}
+              <strong className='blue-title'>Category:</strong>{' '}
+              {product.category}
             </p>
             <p>
-              <text className='blue-title'>Japanese Name:</text>{' '}
+              <strong className='blue-title'>Japanese Name:</strong>{' '}
               {product.productNameJp}
             </p>
             <p>
-              <text className='blue-title'>Details:</text> <br />
+              <strong className='blue-title'>Details:</strong> <br />
               {product.details}
             </p>
             {/* FORM FOR UPDATING ITEM QUANTITY */}
             {/* should write a diff lambda function for just changing quantity */}
-            {isAuthenticated ? (
+            {userContext.isAuthenticated ? (
               <div className='row col-6 offset-3'>
                 <form>
                   <button
                     className='btn btn-danger'
                     onClick={async (e) => {
                       e.preventDefault();
-                      let num = parseInt(product.quantity);
-                      await setProduct({
-                        ...product,
-                        quantity: (num -= 1),
-                      });
                       handleUpdateQuantity();
                     }}
                   >

@@ -10,6 +10,7 @@ It features a React front-end that allows users to browse the product available.
 Sample JSON data:
 
 {
+"product": {
 "category":"Instant noodles",
 "details":"Instant fried noodles with salt by Myojo",
 "images":"https://cdn.shopify.com/s/files/1/0359/6084/8519/products/ippeichanyakisoba_salt_360x.jpg?v=1585974035",
@@ -17,6 +18,7 @@ Sample JSON data:
 "productNameEn":"Ippei Chan Yakisoba",
 "productNameJp":" 一平ちゃん焼きそば",
 "quantity":45
+}
 }
 
 {

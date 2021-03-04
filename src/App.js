@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import ProductDetail from "./components/ProductDetail";
@@ -10,54 +10,40 @@ import Header from "./components/Header";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import GuardedRoute from "./components/auth/GuardedRoute";
-import Footer from "./components/footer";
+import KonbiniState from "./context/konbini/KonbiniState";
+import UserState from "./context/user/UserState";
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    // const authenticateUser = (authState) => {
-    //     setIsAuthenticated(authState);
-    // };
-
-    useEffect(() => {
-        console.log(`Authenticated: ${isAuthenticated}`);
-    }, [isAuthenticated]);
-
     return (
-        <div className="page-container">
-            <div className="content-wrap">
+        <UserState>
+            <KonbiniState>
                 <Router>
-                    <Navigation
-                        isAuthenticated={isAuthenticated}
-                        setIsAuthenticated={setIsAuthenticated}
-                    />
+                    <Navigation />
                     <Header />
                     <Switch>
                         <Route path="/register">
-                            <Register setIsAuthenticated={setIsAuthenticated} />
+                            <Register />
                         </Route>
                         <Route path="/login">
-                            <Login setIsAuthenticated={setIsAuthenticated} />
+                            <Login />
                         </Route>
                         <GuardedRoute
                             path="/products/new"
-                            auth={isAuthenticated}
                             component={NewProduct}
                         />
                         <Route path="/about">
                             <About />
                         </Route>
                         <Route path="/products/:productId">
-                            <ProductDetail isAuthenticated={isAuthenticated} />
+                            <ProductDetail />
                         </Route>
                         <Route path="/">
                             <Home />
                         </Route>
                     </Switch>
                 </Router>
-            </div>
-            <Footer />
-        </div>
+            </KonbiniState>
+        </UserState>
     );
 }
 
