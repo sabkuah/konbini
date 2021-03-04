@@ -3,20 +3,6 @@ const BASE_URL =
   'https://bc0a6qqmm3.execute-api.ca-central-1.amazonaws.com/prod';
 
 //=======================
-//    Empty Object
-//=======================
-
-export const emptyObject = {
-  category: '',
-  details: '',
-  images: '',
-  productId: 'empty',
-  productNameEn: '',
-  productNameJp: '',
-  quantity: 0,
-};
-
-//=======================
 //    Scan Products
 //=======================
 
