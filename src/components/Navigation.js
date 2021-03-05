@@ -28,12 +28,18 @@ const Navigation = () => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='mr-auto'>
-          <NavLink to='/about' className='blue-title px-2'>
-            ABOUT
+          <NavLink to='/products' className='blue-title px-2'>
+            PRODUCTS
           </NavLink>
+
           <NavLink to='/products/new' className='blue-title px-2'>
             NEW PRODUCT
           </NavLink>
+          <NavLink to='/about' className='blue-title px-2'>
+            ABOUT
+          </NavLink>
+        </Nav>
+        <Nav className='ml-auto'>
           {userContext.isAuthenticated ? (
             <NavLink
               to='/'

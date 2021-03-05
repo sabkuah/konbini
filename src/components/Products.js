@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import Spinner from './utils/Spinner';
 
-const Admin = () => {
+const Products = () => {
   const konbiniContext = useContext(KonbiniContext);
   const { getProducts, setLoading, products, loading } = konbiniContext;
 
@@ -20,6 +20,13 @@ const Admin = () => {
     return (
       <div className='body'>
         <div className='container'>
+          <div className='d-flex justify-content-center my-3'>
+            <button className='btn btn-success'>
+              <Link to='/products/new' style={{ color: 'white' }}>
+                Add Product
+              </Link>
+            </button>
+          </div>
           <table className='table mt-1'>
             <thead className='thead'>
               <tr>
@@ -54,17 +61,10 @@ const Admin = () => {
               ))}
             </tbody>
           </table>
-          <div className='d-flex justify-content-center'>
-            <button className='btn btn-success'>
-              <Link to='/products/new' style={{ color: 'white' }}>
-                Add Product
-              </Link>
-            </button>
-          </div>
         </div>
       </div>
     );
   }
 };
 
-export default Admin;
+export default Products;
