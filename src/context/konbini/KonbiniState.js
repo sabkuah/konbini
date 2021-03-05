@@ -30,6 +30,7 @@ const KonbiniState = (props) => {
     const response = await axios.get(`${BASE_URL}/products`);
     const items = JSON.parse(response.data.body);
     console.log('getProducts in state>>', items);
+
     dispatch({
       type: SCAN_PRODUCTS,
       payload: items,
