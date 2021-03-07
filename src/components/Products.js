@@ -17,7 +17,7 @@ const Products = () => {
             </Link>
           </button>
         </div>
-        <table className='table mt-1'>
+        <table className='table mt-1' style={{ backgroundColor: 'lightgrey' }}>
           <thead className='thead'>
             <tr>
               <th scope='col'>#</th>

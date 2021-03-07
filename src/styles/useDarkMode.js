@@ -9,7 +9,7 @@ export const useDarkMode = () => {
     setTheme(mode);
   };
 
-  const themeToggler = () => {
+  const toggleTheme = () => {
     theme === 'light' ? setMode('dark') : setMode('light');
   };
 
@@ -18,5 +18,5 @@ export const useDarkMode = () => {
     localTheme && setTheme(localTheme); //if there is a theme saved in localstorage, setTheme to what is stored
     setLoading(false);
   }, []);
-  return [theme, themeToggler, loading];
+  return [theme, toggleTheme, loading];
 };

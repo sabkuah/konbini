@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className='main-footer pt-3'>
-      <div className='container' style={{ backgroundColor: '#f8f9fa' }}>
+      <div className='container'>
         <div className='row mt-4'>
           {/* Column 1 */}
           <div className='col'>
@@ -34,7 +34,7 @@ const Footer = () => {
         {/* All right reserved / copy rights */}
         <div className='row d-flex justify-content-center'>
           <p>
-            &copy;Konbini{new Date().getFullYear()} || All Rights Reserved ||
+            &copy;Konbini {new Date().getFullYear()} || All Rights Reserved ||
             Terms of service || Privacy
           </p>
         </div>

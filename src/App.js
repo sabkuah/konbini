@@ -18,11 +18,11 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/globalStyles';
 import { lightTheme, darkTheme } from './styles/Themes';
 import { useDarkMode } from './styles/useDarkMode';
-import Toggle from './styles/Toggler';
+
 import Spinner from './components/utils/Spinner';
 
 function App() {
-  const [theme, themeToggler, loading] = useDarkMode();
+  const [theme, toggleTheme, loading] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   if (loading) return <Spinner />;
@@ -32,8 +32,7 @@ function App() {
         <ThemeProvider theme={themeMode}>
           <GlobalStyles />
           <Router>
-            <Toggle theme={theme} toggleTheme={themeToggler} />
-            <Navigation />
+            <Navigation theme={theme} toggleTheme={toggleTheme} />
             <Header />
             <Switch>
               <Route path='/register'>
@@ -46,11 +45,11 @@ function App() {
               <Route path='/about'>
                 <About />
               </Route>
-              <Route path='/products'>
-                <Products />
-              </Route>
               <Route path='/products/:productId'>
                 <ProductDetail />
+              </Route>
+              <Route path='/products'>
+                <Products />
               </Route>
               <Route path='/'>
                 <Home />

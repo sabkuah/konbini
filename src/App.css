@@ -34,6 +34,10 @@ NavLink {
   font-size: larger;
 }
 
+.toggle-text {
+  font-size: 0.8em;
+}
+
 /* ======== HEADER ========= */
 
 .header {
@@ -87,7 +91,7 @@ NavLink {
 }
 
 .main-footer {
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa; */
   color: #5786c7;
   /* padding-top: 2em; */
   /* position: relative; */

@@ -4,8 +4,9 @@ import { Navbar, Nav } from 'react-bootstrap';
 import logo from '../assets/favicon.ico';
 import { NavLink } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import Toggle from '../styles/Toggler';
 
-const Navigation = () => {
+const Navigation = ({ theme, toggleTheme }) => {
   const userContext = useContext(UserContext);
 
   const handleLogOut = async () => {
@@ -18,7 +19,7 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar bg='light' expand='lg'>
+    <Navbar expand='lg'>
       <Navbar.Brand>
         <NavLink to='/'>
           <img src={logo} alt='logo' />
@@ -60,6 +61,7 @@ const Navigation = () => {
               </NavLink>
             </>
           )}
+          <Toggle theme={theme} toggleTheme={toggleTheme} />
         </Nav>
       </Navbar.Collapse>
     </Navbar>
