@@ -55,10 +55,15 @@ NavLink {
 }
 /* ======== HOME PAGE ========= */
 
-.jumbotron {
+.jumbo-div {
   width: 100vw;
   opacity: 0.8;
   position: relative;
+}
+
+.jumbo-img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ======== ADMIN PAGE ========= */

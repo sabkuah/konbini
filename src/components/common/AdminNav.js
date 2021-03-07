@@ -1,18 +1,21 @@
 import React, { useContext } from 'react';
-import UserContext from '../context/user/userContext';
 import { Navbar, Nav } from 'react-bootstrap';
-import logo from '../assets/favicon.ico';
+import logo from '../../assets/favicon.ico';
 import { NavLink } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
-import Toggle from '../styles/Toggler';
+import Toggle from '../../styles/Toggler';
+import UserContext from '../../context/user/userContext';
+import { useHistory } from 'react-router-dom';
 
-const Navigation = ({ theme, toggleTheme }) => {
+const AdminNav = ({ theme, toggleTheme }) => {
   const userContext = useContext(UserContext);
+  const history = useHistory();
 
   const handleLogOut = async () => {
     try {
       await Auth.signOut();
       userContext.logoutUser();
+      history.push('/');
     } catch (e) {
       console.log(e.message);
     }
@@ -23,7 +26,9 @@ const Navigation = ({ theme, toggleTheme }) => {
       <Navbar.Brand>
         <NavLink to='/'>
           <img src={logo} alt='logo' />
-          <strong className='red-title-brand mx-1'>KONBINI</strong>
+          <strong className='red-title-brand mx-1'>
+            KONBINI - ADMIN DASHBOARD
+          </strong>
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -36,8 +41,9 @@ const Navigation = ({ theme, toggleTheme }) => {
           <NavLink to='/products/new' className='blue-title-lg px-2'>
             NEW PRODUCT
           </NavLink>
-          <NavLink to='/about' className='blue-title-lg px-2'>
-            ABOUT
+          {/* TO BE CREATED*/}
+          <NavLink to='/admin/sales' className='blue-title-lg px-2'>
+            SALES
           </NavLink>
         </Nav>
         <Nav className='ml-auto'>
@@ -68,4 +74,4 @@ const Navigation = ({ theme, toggleTheme }) => {
   );
 };
 
-export default Navigation;
+export default AdminNav;

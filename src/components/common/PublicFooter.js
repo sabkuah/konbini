@@ -1,4 +1,4 @@
-const Footer = () => {
+const PublicFooter = () => {
   return (
     <div className='main-footer pt-3'>
       <div className='container'>
@@ -43,4 +43,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default PublicFooter;

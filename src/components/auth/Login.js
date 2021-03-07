@@ -19,7 +19,7 @@ const Login = () => {
       userContext.loginUser();
       setUserName('');
       setPassword('');
-      history.push('/products/new');
+      history.push('/admin/sales');
       //Redirect to last page user was on
     } catch (e) {
       alert(e.message);

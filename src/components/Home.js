@@ -4,6 +4,9 @@ import Spinner from './utils/Spinner';
 import jumbotronImg from '../assets/konbini-jumbotron.jpeg';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
+import PublicNav from '../components/common/PublicNav';
+import Header from '../components/Header';
+import PublicFooter from './common/PublicFooter';
 
 export const Home = () => {
   const context = useContext(KonbiniContext);
@@ -31,21 +34,22 @@ export const Home = () => {
   } else {
     return (
       <>
-        <img src={jumbotronImg} alt='snack truck' className='jumbotron' />
+        <PublicNav />
+        <Header />
+        <div classname='img-fluid jumbo-div'>
+          <img src={jumbotronImg} alt='snack truck' className='jumbo-img' />
+        </div>
         <div className='container'>
           <Slider {...settings}>
             {products.map((product) => (
-              <div
-                className='card p-3'
-                //style={{ width: '23%' }}
-                key={product.productId}
-              >
+              <div className='card p-3' key={product.productId}>
                 <Link to={`/products/${product.productId}`}>
                   <div>
                     <img
                       src={product.images}
                       className='card-img-top'
                       alt={product.productNameEn}
+                      style={{ maxWidth: '100%', maxHeight: '100%' }}
                     />
                   </div>
                 </Link>
@@ -53,6 +57,7 @@ export const Home = () => {
             ))}
           </Slider>
         </div>
+        <PublicFooter />
       </>
     );
   }
