@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className='main-footer'>
+    <div className='main-footer pt-3'>
       <div className='container' style={{ backgroundColor: '#f8f9fa' }}>
         <div className='row mt-4'>
           {/* Column 1 */}

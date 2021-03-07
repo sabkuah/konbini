@@ -14,37 +14,51 @@ import KonbiniState from './context/konbini/KonbiniState';
 import UserState from './context/user/UserState';
 import Footer from './components/footer';
 import Products from './components/Products';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from './styles/globalStyles';
+import { lightTheme, darkTheme } from './styles/Themes';
+import { useDarkMode } from './styles/useDarkMode';
+import Toggle from './styles/Toggler';
+import Spinner from './components/utils/Spinner';
 
 function App() {
+  const [theme, themeToggler, loading] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  if (loading) return <Spinner />;
   return (
     <UserState>
       <KonbiniState>
-        <Router>
-          <Navigation />
-          <Header />
-          <Switch>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <GuardedRoute path='/products/new' component={NewProduct} />
-            <Route path='/about'>
-              <About />
-            </Route>
-            <Route path='/products'>
-              <Products />
-            </Route>
-            <Route path='/products/:productId'>
-              <ProductDetail />
-            </Route>
-            <Route path='/'>
-              <Home />
-            </Route>
-          </Switch>
-          <Footer />
-        </Router>
+        <ThemeProvider theme={themeMode}>
+          <GlobalStyles />
+          <Router>
+            <Toggle theme={theme} toggleTheme={themeToggler} />
+            <Navigation />
+            <Header />
+            <Switch>
+              <Route path='/register'>
+                <Register />
+              </Route>
+              <Route path='/login'>
+                <Login />
+              </Route>
+              <GuardedRoute path='/products/new' component={NewProduct} />
+              <Route path='/about'>
+                <About />
+              </Route>
+              <Route path='/products'>
+                <Products />
+              </Route>
+              <Route path='/products/:productId'>
+                <ProductDetail />
+              </Route>
+              <Route path='/'>
+                <Home />
+              </Route>
+            </Switch>
+            <Footer />
+          </Router>
+        </ThemeProvider>
       </KonbiniState>
     </UserState>
   );
