@@ -9,7 +9,7 @@ It is built with a React front-end that features public and admin routes. Public
 
 The app uses AWS serverless technologies such as DynamoDB, Cognito, Lamba and API Gateway on the backend.
 
-<img src="kb-darkmode.gif" alt="screenshot of darkmode in app" width="500">
+<img src="public/kb-darkmode.gif" alt="screenshot of darkmode in app" width="500">
 
 Sample JSON data:
 
