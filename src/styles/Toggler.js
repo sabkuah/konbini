@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { func, string } from 'prop-types';
 import Switch from 'react-switch';
+import { useDarkMode } from './useDarkMode';
 
 // const Button = styled.button`
 //   background: ${({ theme }) => theme.background};
@@ -12,13 +13,15 @@ import Switch from 'react-switch';
 //   padding: 0.6rem;
 // `;
 
-const Toggle = ({ theme, toggleTheme }) => {
+const Toggle = () => {
   const [toggled, setToggled] = useState(false);
+  const [theme, toggleTheme, loading] = useDarkMode();
   // return <Button onClick={toggleTheme}>Switch Theme</Button>;
   return (
     <label className='d-flex flex-column'>
       <Switch
         onChange={() => {
+          console.log('theme', theme);
           toggleTheme();
           setToggled(!toggled);
         }}
@@ -29,8 +32,8 @@ const Toggle = ({ theme, toggleTheme }) => {
   );
 };
 
-Toggle.propTypes = {
-  theme: string.isRequired,
-  toggleTheme: func.isRequired,
-};
+// Toggle.propTypes = {
+//   theme: string.isRequired,
+//   toggleTheme: func.isRequired,
+// };
 export default Toggle;

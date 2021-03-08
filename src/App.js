@@ -17,16 +17,18 @@ import { lightTheme, darkTheme } from './styles/Themes';
 import { useDarkMode } from './styles/useDarkMode';
 import Public from './containers/layouts/Public';
 import Admin from './containers/layouts/Admin';
-import Spinner from './components/utils/Spinner';
 import Sales from './components/Sales';
 import Products from './components/Products';
 import NotFound from './components/utils/NotFound';
 
 function App() {
-  const [theme, toggleTheme, loading] = useDarkMode();
+  const [theme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  if (loading) return <Spinner />;
+  {
+    /* <Navigation theme={theme} toggleTheme={toggleTheme} /> */
+  }
+
   return (
     <UserState>
       <KonbiniState>
@@ -69,8 +71,6 @@ function App() {
               <Route path='/' exact component={Home} />
               <Route component={NotFound} />
             </Switch>
-
-            {/* <Navigation theme={theme} toggleTheme={toggleTheme} /> */}
           </Router>
         </ThemeProvider>
       </KonbiniState>
