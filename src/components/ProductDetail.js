@@ -55,7 +55,7 @@ const ProductDetail = () => {
     //eslint-disable-next-line
   }, [productId, show]);
 
-  if (loading) {
+  if (loading === true) {
     return <Spinner />;
   } else {
     return (
@@ -157,16 +157,16 @@ const ProductDetail = () => {
           backdrop='static'
           keyboard={false}
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton style={{ backgroundColor: '#3D3D3D' }}>
             <Modal.Title>Edit Product</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body style={{ backgroundColor: '#3D3D3D' }}>
             <EditProduct handleClose={handleClose} item={product} />
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant='secondary' onClick={handleClose}>
+          <Modal.Footer style={{ backgroundColor: '#3D3D3D' }}>
+            {/* <Button variant='primary' onClick={handleClose}>
               Close
-            </Button>
+            </Button> */}
           </Modal.Footer>
         </Modal>
       </div>

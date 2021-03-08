@@ -1,12 +1,27 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import KonbiniContext from '../context/konbini/konbiniContext';
-import { Link } from 'react-router-dom';
-import { FaEdit } from 'react-icons/fa';
 import Spinner from './utils/Spinner';
+import jumbotronImg from '../assets/konbini-jumbotron.jpeg';
+import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
+import PublicNav from '../components/common/PublicNav';
+import Header from '../components/Header';
+import PublicFooter from './common/PublicFooter';
 
-const Home = () => {
-  const konbiniContext = useContext(KonbiniContext);
-  const { getProducts, setLoading, products, loading } = konbiniContext;
+export const Home = () => {
+  const context = useContext(KonbiniContext);
+  const { getProducts, setLoading, products, loading } = context;
+
+  var settings = {
+    //dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    arrows: true,
+  };
 
   useEffect(() => {
     setLoading();
@@ -18,53 +33,33 @@ const Home = () => {
     return <Spinner />;
   } else {
     return (
-      <div className='body'>
-        <div className='container'>
-          <table className='table mt-1'>
-            <thead className='thead'>
-              <tr>
-                <th scope='col'>#</th>
-                <th scope='col'>Product Name (EN)</th>
-                <th scope='col'>Product Name (JP)</th>
-                <th scope='col'>Category</th>
-                <th scope='col'>Quantity</th>
-                <th scope='col'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.productId}>
-                  <td>
-                    <Link to={`/products/${product.productId}`}>
-                      {product.productId.slice(0, 7)}
-                    </Link>
-                  </td>
-                  <td>{product.productNameEn}</td>
-                  <td>{product.productNameJp}</td>
-                  <td>{product.category}</td>
-                  <td>{product.quantity}</td>
-                  <td>
-                    <button className='btn'>
-                      <Link to={`/products/${product.productId}`}>
-                        <FaEdit />
-                      </Link>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className='d-flex justify-content-center'>
-            <button className='btn btn-success'>
-              <Link to='/products/new' style={{ color: 'white' }}>
-                Add Product
-              </Link>
-            </button>
-          </div>
+      <>
+        <PublicNav />
+        <Header />
+        <div classname='img-fluid jumbo-div'>
+          <img src={jumbotronImg} alt='snack truck' className='jumbo-img' />
         </div>
-      </div>
+        <div className='container'>
+          <Slider {...settings}>
+            {products.map((product) => (
+              <div className='card p-3' key={product.productId}>
+                <Link to={`/products/${product.productId}`}>
+                  <div>
+                    <img
+                      src={product.images}
+                      className='card-img-top'
+                      alt={product.productNameEn}
+                      style={{ maxWidth: '100%', maxHeight: '100%' }}
+                    />
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <PublicFooter />
+      </>
     );
   }
 };
-
 export default Home;
