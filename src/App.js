@@ -41,7 +41,7 @@ function App() {
                   <Switch>
                     <Route path='/admin/sales' component={Sales} />
                     <Route path='/admin/inventory' component={InventoryList} />
-                    <Route path='/admin/products/new' component={NewProduct} />
+                    <Route path='/admin/new' component={NewProduct} />
                     <Route path='/admin' component={Login} />
                     <Route component={NotFound} />
                   </Switch>

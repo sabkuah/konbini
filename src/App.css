@@ -111,7 +111,8 @@ NavLink {
   border-radius: 5px;
   color: white;
   font-family: 'Squada One', cursive;
-  font-size: 1.3em;
+  font-size: 1.5em;
+  padding: 10%;
 }
 
 .graph {
@@ -119,6 +120,5 @@ NavLink {
   min-height: 25vh;
   border-radius: 5px;
   color: white;
-  font-family: 'Squada One', cursive;
-  font-size: 1.3em;
+  font-size: 0.8em;
 }

@@ -32,16 +32,14 @@ const AdminNav = ({ theme, toggleTheme }) => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='mr-auto'>
-          {/* <NavLink to='/admin/inventory' className='blue-title-lg px-2'>
-            PRODUCTS
-          </NavLink> */}
-
-          <NavLink to='/admin/products/new' className='blue-title-lg px-2'>
+          <NavLink to='/admin/new' className='blue-title-lg px-2'>
             NEW PRODUCT
           </NavLink>
-          {/* TO BE CREATED*/}
           <NavLink to='/admin/sales' className='blue-title-lg px-2'>
             SALES
+          </NavLink>
+          <NavLink to='/' className='blue-title-lg px-2'>
+            PUBLIC
           </NavLink>
         </Nav>
         <Nav className='ml-auto'>

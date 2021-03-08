@@ -13,11 +13,12 @@ const Sales = () => {
           </div>
         </div>
         <div className='col '>
-          <div className='graph box-shadow d-flex justify-content-center'>
+          <div className='graph box-shadow d-flex justify-content-center flex-column'>
             <img
               src='https://docs.telerik.com/blazor-ui/components/chart/types/images/exploded-pie-chart.png'
               alt='placeholder graph'
             />
+            <p>Last Updated: {Date()}</p>
           </div>
         </div>
       </div>

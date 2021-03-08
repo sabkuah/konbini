@@ -22,7 +22,7 @@ const InventoryList = () => {
         <div className='container'>
           <div className='d-flex justify-content-center my-3'>
             <button className='btn btn-success'>
-              <Link to='/products/new' style={{ color: 'white' }}>
+              <Link to='/admin/new' style={{ color: 'white' }}>
                 Add Product
               </Link>
             </button>
