@@ -7,7 +7,7 @@ import Toggle from '../../styles/Toggler';
 import UserContext from '../../context/user/userContext';
 import { useHistory } from 'react-router-dom';
 
-const PublicNav = ({ theme, toggleTheme }) => {
+const PublicNav = () => {
   const userContext = useContext(UserContext);
   const history = useHistory();
 
@@ -63,7 +63,7 @@ const PublicNav = ({ theme, toggleTheme }) => {
               </NavLink>
             </>
           )}
-          <Toggle theme={theme} toggleTheme={toggleTheme} />
+          <Toggle />
         </Nav>
       </Navbar.Collapse>
     </Navbar>

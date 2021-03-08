@@ -7,6 +7,7 @@ export const useDarkMode = () => {
   const setMode = (mode) => {
     window.localStorage.setItem('theme', mode);
     setTheme(mode);
+    console.log('setMode:', mode);
   };
 
   const toggleTheme = () => {
@@ -17,6 +18,7 @@ export const useDarkMode = () => {
     const localTheme = window.localStorage.getItem('theme');
     localTheme && setTheme(localTheme); //if there is a theme saved in localstorage, setTheme to what is stored
     setLoading(false);
-  }, []);
+  }, [theme, setTheme, setMode]);
+
   return [theme, toggleTheme, loading];
 };
