@@ -102,3 +102,23 @@ NavLink {
   /* position: relative; */
   /* width: auto; */
 }
+
+/* ======== ADMIN SALES PAGE ========= */
+
+.stats {
+  background-color: #5786c7;
+  min-height: 25vh;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Squada One', cursive;
+  font-size: 1.3em;
+}
+
+.graph {
+  background-color: #d44349;
+  min-height: 25vh;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Squada One', cursive;
+  font-size: 1.3em;
+}

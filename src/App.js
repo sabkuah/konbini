@@ -20,6 +20,7 @@ import Admin from './containers/layouts/Admin';
 import Spinner from './components/utils/Spinner';
 import Sales from './components/Sales';
 import Products from './components/Products';
+import NotFound from './components/utils/NotFound';
 
 function App() {
   const [theme, toggleTheme, loading] = useDarkMode();
@@ -36,36 +37,37 @@ function App() {
               {/* Admin Routes */}
               <Route path='/admin/:path?' exact>
                 <Admin>
+                  {/* To Do: Guard Admin Routes, fix GuardedRouteHOC */}
                   <Switch>
                     <Route path='/admin/sales' component={Sales} />
                     <Route path='/admin/inventory' component={InventoryList} />
-                    <GuardedRoute
-                      path='/admin/products/new'
-                      component={NewProduct}
-                    />
+                    <Route path='/admin/products/new' component={NewProduct} />
                     <Route path='/admin' component={Login} />
+                    <Route component={NotFound} />
                   </Switch>
                 </Admin>
               </Route>
 
               {/* Public Routes */}
-              <Route path='/:path' exact>
+              <Route path='/:path'>
                 <Public>
                   <Switch>
                     <Route path='/register' component={Register} />
                     <Route path='/login' component={Login} />
                     <Route path='/about' component={About} />
-                    <Route path='/products' component={Products} />
+                    <Route path='/products' exact component={Products} />
                     <Route
                       path='/products/:productId'
                       component={ProductDetail}
                     />
+                    <Route component={NotFound} />
                   </Switch>
                 </Public>
               </Route>
 
               {/* Landing Page */}
               <Route path='/' exact component={Home} />
+              <Route component={NotFound} />
             </Switch>
 
             {/* <Navigation theme={theme} toggleTheme={toggleTheme} /> */}

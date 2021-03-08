@@ -4,6 +4,7 @@ import AdminFooter from '../../components/common/AdminFooter';
 
 export default ({ children }) => {
   console.log('Admin view');
+  //const { toggleTheme, theme } = props;
 
   return (
     <div>

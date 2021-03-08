@@ -1,6 +1,6 @@
 const AdminFooter = () => {
   return (
-    <div className='main-footer pt-3'>
+    <div className='main-footer pt-3 bg-dark'>
       <div className='container'>
         <hr />
         {/* All right reserved / copy rights */}

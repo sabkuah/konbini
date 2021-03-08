@@ -22,23 +22,21 @@ const AdminNav = ({ theme, toggleTheme }) => {
   };
 
   return (
-    <Navbar expand='lg'>
+    <Navbar expand='lg bg-dark'>
       <Navbar.Brand>
-        <NavLink to='/'>
+        <NavLink to='/admin/sales'>
           <img src={logo} alt='logo' />
-          <strong className='red-title-brand mx-1'>
-            KONBINI - ADMIN DASHBOARD
-          </strong>
+          <strong className='red-title-brand mx-1'>ADMIN DASHBOARD</strong>
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='mr-auto'>
-          <NavLink to='/products' className='blue-title-lg px-2'>
+          {/* <NavLink to='/admin/inventory' className='blue-title-lg px-2'>
             PRODUCTS
-          </NavLink>
+          </NavLink> */}
 
-          <NavLink to='/products/new' className='blue-title-lg px-2'>
+          <NavLink to='/admin/products/new' className='blue-title-lg px-2'>
             NEW PRODUCT
           </NavLink>
           {/* TO BE CREATED*/}
